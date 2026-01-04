@@ -1,25 +1,20 @@
 /*
-Theme Name: 지원금 스킨
-Theme URI: https://example.com
-Author: 아로스
-Author URI: https://aros100.com
-Description: 지원금 정보 표시를 위한 워드프레스 테마
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-*/
+ * 지원금 스킨 스타일시트
+ * Jekyll/GitHub Pages 용
+ */
 
 /* 기본 스타일 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 body {
-    background-color: white;
-    padding-top: 100px;
+    background-color: #ffffff;
+    padding-top: 120px;
+    line-height: 1.6;
 }
 
 .support-container {
@@ -36,7 +31,7 @@ body {
     width: 100%;
     background: white;
     z-index: 999;
-    padding: 0 8px;
+    padding: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -60,17 +55,21 @@ body {
 .tab-item {
     flex: 1;
     text-align: center;
+    min-width: 0;
 }
 
 .tab-link {
     display: block;
-    padding: 10px 4px;
+    padding: 12px 8px;
     text-decoration: none;
     color: #6B7280;
     border-radius: 25px;
     transition: all 0.3s ease;
     font-size: 14px;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tab-link:hover {
@@ -105,7 +104,7 @@ body {
 .intro-sub {
     font-size: 25px;
     color: #374151;
-    margin-bottom: 1px;
+    margin-bottom: 4px;
 }
 
 .intro-title {
@@ -116,13 +115,25 @@ body {
     margin: 0;
 }
 
+/* 광고 영역 */
+.ad-container {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 20px 0;
+    text-align: center;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* 정보 박스 */
 .info-box {
     background: #F0F9FF;
     border-radius: 16px;
     padding: 24px;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin: 20px 0 30px;
     border-left: 4px solid #3182F6;
 }
 
@@ -168,7 +179,6 @@ body {
 .info-card {
     background: #ffffff;
     border-radius: 20px;
-    padding: 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     display: flex;
     flex-direction: column;
@@ -177,6 +187,7 @@ body {
     color: inherit;
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow: hidden;
 }
 
 .info-card:hover {
@@ -194,6 +205,35 @@ body {
     background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
 }
 
+.info-card-badge {
+    position: relative;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.info-card-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+}
+
 .info-card-amount {
     font-size: 32px;
     font-weight: 800;
@@ -207,18 +247,6 @@ body {
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     margin-top: 6px;
-}
-
-.info-card-badge {
-    position: relative;
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 8px;
 }
 
 .info-card-content {
@@ -289,10 +317,18 @@ body {
     font-size: 15px;
     font-weight: 700;
     transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(49, 130, 246, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(49, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(49, 130, 246, 0); }
 }
 
 .info-card-btn:hover {
     background: linear-gradient(135deg, #1E6AD4 0%, #1556B0 100%);
+    transform: translateY(-2px);
 }
 
 .btn-arrow {
@@ -313,6 +349,22 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-urgent {
@@ -369,11 +421,25 @@ body {
     text-decoration: none;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 .hero-cta:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.cta-arrow {
+    transition: transform 0.3s ease;
+}
+
+.hero-cta:hover .cta-arrow {
+    transform: translateX(4px);
 }
 
 .hero-trust {
@@ -392,6 +458,7 @@ body {
 
 .hero-notice {
     background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
     border-radius: 12px;
     padding: 16px 20px;
     margin-top: 24px;
@@ -412,10 +479,92 @@ body {
     margin: 0;
 }
 
+/* 이탈 방지 팝업 */
+.exit-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.exit-popup-overlay.show {
+    display: flex;
+}
+
+.exit-popup {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 340px;
+    text-align: center;
+    margin: 20px;
+    animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.exit-popup-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.exit-popup-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.exit-popup-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #3182F6 0%, #1E6AD4 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.exit-popup-btn:hover {
+    background: linear-gradient(135deg, #1E6AD4 0%, #1556B0 100%);
+}
+
+.exit-popup-close {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 13px;
+    cursor: pointer;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
     body {
-        padding-top: 120px;
+        padding-top: 100px;
+    }
+    
+    .intro-section {
+        padding: 24px 16px 20px;
+    }
+    
+    .intro-title {
+        font-size: 28px;
     }
     
     .info-card-grid {
@@ -426,4 +575,24 @@ body {
     .hero-title {
         font-size: 26px;
     }
-  }
+    
+    .tab-link {
+        font-size: 13px;
+        padding: 10px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-title {
+        font-size: 24px;
+    }
+    
+    .info-card-amount {
+        font-size: 28px;
+    }
+    
+    .tab-link {
+        font-size: 12px;
+        padding: 8px 4px;
+    }
+    }
