@@ -1,39 +1,47 @@
 /**
- * 워드프레스 지원금 스킨 JavaScript
+ * 지원금 스킨 JavaScript
+ * Vanilla JS (jQuery 불필요)
  */
 
-(function($) {
+(function() {
     'use strict';
 
-    // DOM 준비
-    $(document).ready(function() {
+    // DOM 로드 완료 후 실행
+    document.addEventListener('DOMContentLoaded', function() {
         initTabs();
         initExitPopup();
         initSmoothScroll();
+        initCardAnimations();
     });
 
     /**
      * 탭 초기화
      */
     function initTabs() {
-        const tabs = $('.tab-link');
+        const tabs = document.querySelectorAll('.tab-link');
         const hash = window.location.hash;
         
         if (hash) {
-            tabs.removeClass('active');
-            tabs.filter('[href="' + hash + '"]').addClass('active');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('href') === hash) {
+                    tab.classList.add('active');
+                }
+            });
         }
 
-        tabs.on('click', function(e) {
-            const href = $(this).attr('href');
-            
-            // 내부 링크인 경우에만 탭 전환
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                tabs.removeClass('active');
-                $(this).addClass('active');
-                window.location.hash = href;
-            }
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // 내부 링크인 경우에만 탭 전환
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    window.location.hash = href;
+                }
+            });
         });
     }
 
@@ -45,44 +53,23 @@
         let closeCount = parseInt(sessionStorage.getItem('exitPopupCloseCount')) || 0;
         let scrollTriggered = false;
 
-        // 팝업 HTML 동적 생성
-        if ($('#exitPopup').length === 0) {
-            const popupHTML = `
-                <div class="exit-popup-overlay" id="exitPopup" style="display:none;">
-                    <div class="exit-popup">
-                        <div class="exit-popup-title">🎁 잠깐! 놓치신 혜택이 있어요</div>
-                        <div class="exit-popup-desc">
-                            지금 확인 안 하면<br/>
-                            <strong>최대 300만원</strong> 지원금을 못 받을 수 있어요!
-                        </div>
-                        <button class="exit-popup-btn" id="exitPopupConfirm">
-                            내 지원금 확인하기 →
-                        </button>
-                        <button class="exit-popup-close" id="exitPopupClose">
-                            다음에 할게요
-                        </button>
-                    </div>
-                </div>
-            `;
-            $('body').append(popupHTML);
-        }
-
-        const $popup = $('#exitPopup');
+        const popup = document.getElementById('exitPopup');
+        if (!popup) return;
 
         // 팝업 표시
         function showPopup() {
             if (closeCount < 2 && !popupShown) {
-                $popup.fadeIn(300);
+                popup.classList.add('show');
             }
         }
 
         // 팝업 닫기
         function closePopup() {
-            $popup.fadeOut(300);
+            popup.classList.remove('show');
         }
 
         // PC: 마우스 이탈 감지
-        $(document).on('mouseout', function(e) {
+        document.addEventListener('mouseout', function(e) {
             if (e.clientY < 0) {
                 showPopup();
             }
@@ -90,15 +77,15 @@
 
         // 뒤로가기 감지
         history.pushState(null, '', location.href);
-        $(window).on('popstate', function() {
+        window.addEventListener('popstate', function() {
             showPopup();
             history.pushState(null, '', location.href);
         });
 
         // 모바일: 스크롤 60% 도달
-        $(window).on('scroll', function() {
-            const scrollHeight = $(document).height() - $(window).height();
-            const percent = ($(window).scrollTop() / scrollHeight) * 100;
+        window.addEventListener('scroll', function() {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const percent = (window.scrollY / scrollHeight) * 100;
             
             if (percent > 60 && !scrollTriggered) {
                 showPopup();
@@ -106,25 +93,27 @@
             }
         });
 
-        // 확인 버튼 클릭
-        $(document).on('click', '#exitPopupConfirm', function() {
+        // 전역 함수로 노출 (HTML onclick에서 사용)
+        window.closePopupAndScroll = function() {
             closePopup();
-            $('.hero-section').get(0).scrollIntoView({ behavior: 'smooth' });
-        });
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
 
-        // 닫기 버튼 클릭
-        $(document).on('click', '#exitPopupClose', function() {
+        window.closePopupNotNow = function() {
             closePopup();
             popupShown = true;
             closeCount++;
             sessionStorage.setItem('exitPopupShown', 'true');
             sessionStorage.setItem('exitPopupCloseCount', closeCount);
-        });
+        };
 
         // 오버레이 클릭 시 닫기
-        $(document).on('click', '#exitPopup', function(e) {
+        popup.addEventListener('click', function(e) {
             if (e.target.id === 'exitPopup') {
-                $('#exitPopupClose').click();
+                window.closePopupNotNow();
             }
         });
     }
@@ -133,16 +122,20 @@
      * 부드러운 스크롤
      */
     function initSmoothScroll() {
-        $('a[href^="#"]').on('click', function(e) {
-            const href = $(this).attr('href');
-            const $target = $(href);
-            
-            if ($target.length) {
-                e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $target.offset().top - 100
-                }, 500);
-            }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                
+                if (target) {
+                    e.preventDefault();
+                    const offsetTop = target.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     }
 
@@ -150,22 +143,23 @@
      * 카드 애니메이션
      */
     function initCardAnimations() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, { threshold: 0.1 });
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
 
-        $('.info-card').each(function() {
-            observer.observe(this);
-        });
+            document.querySelectorAll('.info-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        }
     }
 
-    // 페이지 로드 후 애니메이션 초기화
-    $(window).on('load', function() {
-        initCardAnimations();
-    });
-
-})(jQuery);
+})();
