@@ -1,4 +1,8 @@
-<!-- 워드프레스 HTML 구조 -->
+---
+layout: default
+title: 지원금 메인 페이지
+---
+
 <div class="support-main-wrapper">
     <div class="support-container">
         
@@ -7,21 +11,21 @@
             <div class="support-container">
                 <nav class="tab-container">
                     <ul class="tabs">
-                        <li class="tab-item">
-                            <a class="tab-link active" href="https://index1.jiwungum100.qzz.io">
-                                전국민 지원금
-                            </a>
-                        </li>
-                        <li class="tab-item">
-                            <a class="tab-link" href="https://index1.jiwungum100.qzz.io">
-                                청년지원금
-                            </a>
-                        </li>
-                        <li class="tab-item">
-                            <a class="tab-link" href="https://index1.jiwungum100.qzz.io">
-                                소상공인 지원금
-                            </a>
-                        </li>
+                <li class="tab-item">
+                    <a class="tab-link active" href="https://index1.jiwungum100.qzz.io">
+                        전국민 지원금
+                    </a>
+                </li>
+                <li class="tab-item">
+                    <a class="tab-link" href="https://index1.jiwungum100.qzz.io">
+                        청년지원금 
+                    </a>
+                </li>
+                <li class="tab-item">
+                    <a class="tab-link" href="https://index1.jiwungum100.qzz.io">
+                        소상공인 지원금
+                    </a>
+                </li>
                     </ul>
                 </nav>
             </div>
@@ -35,9 +39,7 @@
         </div>
 
         <!-- 광고 영역 -->
-        <div class="ad-section">
-            <!-- 여기에 애드센스 코드 삽입 -->
-        </div>
+        <!-- 광고 코드를 입력하지 않았습니다 -->
 
         <!-- 정보 박스 -->
         <div class="info-box">
@@ -52,55 +54,30 @@
         <!-- 카드 그리드 -->
         <div class="info-card-grid">
 
-            <a class="info-card featured" href="https://index1.jiwungum100.qzz.io">
-                <div class="info-card-highlight">
-                    <span class="info-card-badge">🔥 인기</span>
-                    <div class="info-card-amount">최대 330만원</div>
-                    <div class="info-card-amount-sub">가구유형별 차등지급</div>
+    <a class="info-card featured" href="https://index1.jiwungum100.qzz.io">
+        <div class="info-card-highlight">
+                <span class="info-card-badge">🔥 인기</span>
+            <div class="info-card-amount">최대 1억원</div>
+            <div class="info-card-amount-sub">창업지원금 + 생활안정자금</div>
+        </div>
+        <div class="info-card-content">
+            <h3 class="info-card-title">정부지원금</h3>
+            <p class="info-card-desc">정부가 지원하는 각종 보조금 및 지원금 통합 안내</p>
+            <div class="info-card-details">
+                <div class="info-card-row">
+                    <span class="info-card-label">지원대상</span>
+                    <span class="info-card-value">소상공인, 창업자, 취약계층</span>
                 </div>
-                <div class="info-card-content">
-                    <h3 class="info-card-title">근로장려금</h3>
-                    <p class="info-card-desc">일하는 저소득층 가구에 현금을 지원하는 근로연계형 소득지원제도</p>
-                    <div class="info-card-details">
-                        <div class="info-card-row">
-                            <span class="info-card-label">지원대상</span>
-                            <span class="info-card-value">연소득 2,400만원 이하 근로소득자</span>
-                        </div>
-                        <div class="info-card-row">
-                            <span class="info-card-label">신청시기</span>
-                            <span class="info-card-value">매년 5월 1일~5월 31일</span>
-                        </div>
-                    </div>
-                    <div class="info-card-btn">
-                        지금 바로 신청하기 <span class="btn-arrow">→</span>
-                    </div>
+                <div class="info-card-row">
+                    <span class="info-card-label">신청시기</span>
+                    <span class="info-card-value">연중 상시</span>
                 </div>
-            </a>
-
-            <a class="info-card" href="https://index1.jiwungum100.qzz.io">
-                <div class="info-card-highlight">
-                    <div class="info-card-amount">자녀 1명당 최대 100만원</div>
-                    <div class="info-card-amount-sub">18세 미만 부양자녀 기준</div>
-                </div>
-                <div class="info-card-content">
-                    <h3 class="info-card-title">자녀장려금</h3>
-                    <p class="info-card-desc">저소득 가정의 자녀 양육비 부담을 덜어주는 정부 지원금</p>
-                    <div class="info-card-details">
-                        <div class="info-card-row">
-                            <span class="info-card-label">지원대상</span>
-                            <span class="info-card-value">연소득 4,000만원 이하 자녀양육가구</span>
-                        </div>
-                        <div class="info-card-row">
-                            <span class="info-card-label">신청시기</span>
-                            <span class="info-card-value">매년 5월 1일~5월 31일</span>
-                        </div>
-                    </div>
-                    <div class="info-card-btn">
-                        지금 바로 신청하기 <span class="btn-arrow">→</span>
-                    </div>
-                </div>
-            </a>
-
+            </div>
+            <div class="info-card-btn">
+                지금 바로 신청하기 <span class="btn-arrow">→</span>
+            </div>
+        </div>
+    </a>
         </div>
 
         <!-- 히어로 섹션 -->
@@ -129,5 +106,22 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<!-- 이탈 방지 팝업 -->
+<div class="exit-popup-overlay" id="exitPopup">
+    <div class="exit-popup">
+        <div class="exit-popup-title">🎁 잠깐! 놓치신 혜택이 있어요</div>
+        <div class="exit-popup-desc">
+            지금 확인 안 하면<br/>
+            <strong>최대 300만원</strong> 지원금을 못 받을 수 있어요!
+        </div>
+        <button class="exit-popup-btn" onclick="closePopupAndScroll()">
+            내 지원금 확인하기 →
+        </button>
+        <button class="exit-popup-close" onclick="closePopupNotNow()">
+            다음에 할게요
+        </button>
     </div>
 </div>
